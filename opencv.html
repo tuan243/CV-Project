@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Hello opencv.js</h2>
+    <p id="status">OpenCV.js is loading...</p>
+    <div>
+        <button id="tryit-btn">Try it</button>
+        <div class="inputoutput">
+            <!-- <img  alt="No image" id="image"> -->
+            <div class="caption">canvasInput1<input type="file" name="file" id="fileInput1"></div>
+            <canvas id="canvasInputId1" width="400" height="400"></canvas>
+            <div class="caption">canvasInpput2<input type="file" name="file" id="fileInput2"></div>
+            <canvas id="canvasInputId2" width="400" height="400"></canvas>
+        </div>
+        <div class="inputoutput">
+            <canvas id="canvasOutputId" width="400" height="400"></canvas>
+            <div class="caption">canvasOutput</div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+    <script type="text/javascript">
+        function onOpenCvReady() {
+            document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
+        }
+    </script>
+    <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+</body>
+</html>

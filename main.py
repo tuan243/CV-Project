@@ -53,22 +53,32 @@ def remove_green(img):
 
     return alpha
 
-src1 = cv.imread('gscropped1.png')
-src2 = cv.imread('bg_out.jpg')
-mask = remove_green(src1)
-cv.imwrite('mask.png', mask)
+# src1 = cv.imread('gscropped1.png')
+# src2 = cv.imread('bg_out.jpg')
+# mask = remove_green(src1)
+# cv.imwrite('mask.png', mask)
 
-masked_img = np.copy(src1)
-masked_img[mask == 0] = [0, 0, 0]
-cv.imwrite('masked_img.jpg',masked_img)
+# masked_img = np.copy(src1)
+# masked_img[mask == 0] = [0, 0, 0]
+# cv.imwrite('masked_img.jpg',masked_img)
 
-crop_background = np.copy(src2)
-crop_background[mask != 0] = [0, 0, 0]
-cv.imwrite('crop_background.jpg', crop_background)
+# crop_background = np.copy(src2)
+# crop_background[mask != 0] = [0, 0, 0]
+# cv.imwrite('crop_background.jpg', crop_background)
 
-finale_image = crop_background + masked_img
-cv.imwrite('finale_image.jpg', finale_image)
+# finale_image = crop_background + masked_img
+# cv.imwrite('finale_image.jpg', finale_image)
 
-cv.waitKey(0)
+# cv.waitKey(0)
 
+img = cv.imread('gscropped1.png')
+mask = np.zeros(img.shape[:2],np.uint8)
+bgdModel = np.zeros((1,65),np.float64)
+fgdModel = np.zeros((1,65),np.float64)
+rect = (15,15,230,130)
+cv.grabCut(img,mask,rect,bgdModel,fgdModel,5,cv.GC_INIT_WITH_RECT)
+mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
+img = img*mask2[:,:,np.newaxis]
+
+plt.imshow(img),plt.colorbar(),plt.show()
 
