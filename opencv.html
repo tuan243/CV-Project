@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <h2>Hello opencv.js</h2>
@@ -14,13 +19,15 @@
         <div class="inputoutput">
             <!-- <img  alt="No image" id="image"> -->
             <div class="caption">canvasInput1<input type="file" name="file" id="fileInput1"></div>
-            <canvas id="canvasInputId1" width="400" height="400"></canvas>
+            <canvas id="canvasInputId1"></canvas>
             <div class="caption">canvasInpput2<input type="file" name="file" id="fileInput2"></div>
-            <canvas id="canvasInputId2" width="400" height="400"></canvas>
+            <canvas id="canvasInputId2"></canvas>
         </div>
         <div class="inputoutput">
             <canvas id="canvasOutputId" width="400" height="400"></canvas>
             <div class="caption">canvasOutput</div>
+            <canvas id="canvasOutputId2" width="400" height="400"></canvas>
+            <div class="caption">canvasOutput2</div>
         </div>
     </div>
     <script src="main.js"></script>
