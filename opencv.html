@@ -12,22 +12,30 @@
     </style>
 </head>
 <body>
-    <h2>Hello opencv.js</h2>
+    <h2>Chroma-key</h2>
     <p id="status">OpenCV.js is loading...</p>
     <div>
         <button id="tryit-btn">Try it</button>
         <div class="inputoutput">
-            <!-- <img  alt="No image" id="image"> -->
-            <div class="caption">canvasInput1<input type="file" name="file" id="fileInput1"></div>
-            <canvas id="canvasInputId1"></canvas>
-            <div class="caption">canvasInpput2<input type="file" name="file" id="fileInput2"></div>
-            <canvas id="canvasInputId2"></canvas>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="caption">Ảnh nền xanh lá<input type="file" name="file" id="fileInput1" accept="image/*"></div>
+                            <canvas id="canvasInputId1"></canvas>
+                        </td>
+                        <td>
+                            <div class="caption">Ảnh background<input type="file" name="file" id="fileInput2" accept="image/*"></div>
+                            <canvas id="canvasInputId2"></canvas>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="inputoutput">
-            <canvas id="canvasOutputId" width="400" height="400"></canvas>
-            <div class="caption">canvasOutput</div>
-            <canvas id="canvasOutputId2" width="400" height="400"></canvas>
-            <div class="caption">canvasOutput2</div>
+            <div class="caption">Ảnh kết quả, click vào ảnh để chỉnh sửa</div>
+            <canvas id="canvasOutputId"></canvas>
+            <a id="download" download="output.jpg"><button type="button" id="download-btn" disabled>Download</button></a>
         </div>
     </div>
     <script src="main.js"></script>
