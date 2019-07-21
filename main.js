@@ -1,6 +1,8 @@
 let segmentedImg; //ảnh lưu kết quả segment
 let mask; //mask dùng để lọc foreground từ ảnh nền xanh lá
 let imgLoadedCount = 0;
+let check1 = 0;
+let check2 = 0;
 
 //Hàm tạo mask từ ảnh nền phông xanh lá bằng cách dùng cv.inRange để bắt màu xanh lá cây
 function CreateMask(img) {
@@ -14,7 +16,7 @@ function CreateMask(img) {
     return dst;
 }
 
-//Hàm xử lý 2 ảnh đầu vào kết hợp với mask cho ra ảnh đích 
+//Hàm xử lý cộng 2 ảnh đầu vào kết hợp với mask cho ra ảnh đích 
 function processImg(src1, src2, theMask) {
     let theDst = new cv.Mat();
     let maskInv = new cv.Mat();
@@ -37,6 +39,7 @@ function processImg(src1, src2, theMask) {
 // event click cho nút Try It, sau khi đã đưa vào 2 ảnh đầu vào
 let tryItBtn = document.getElementById('tryit-btn');
 tryItBtn.addEventListener('click', () => {
+    imgLoadedCount = check1 + check2;
     if (imgLoadedCount < 2) {
         alert('Vui lòng nhập đủ 2 ảnh đầu vào')
         return;
@@ -95,6 +98,7 @@ tryItBtn.addEventListener('click', () => {
     cv.cvtColor(imgFg, imgFg, cv.COLOR_RGBA2RGB, 0);
     cv.watershed(imgFg, markers);
 
+    // lưu kết quả segment cho thao tác chỉnh sửa
     segmentedImg = markers.clone();
 
     downloadBtn.disabled = false;
@@ -128,6 +132,7 @@ canvasOutput.addEventListener('click', e => {
         }
         modified = true;
     }
+    // chỉnh sửa mask khi click vào segment
     if (label != 1) {
         for (let i = 0; i < mask.rows; i++) {
             for (let j = 0; j < mask.cols; j++) {
@@ -140,6 +145,7 @@ canvasOutput.addEventListener('click', e => {
         }
     }
 
+    //cộng lại 2 image theo mask mới
     processImg(src1, src2, mask);
     src1.delete(); src2.delete();
 });
@@ -168,6 +174,7 @@ inputElement2.addEventListener("change", (e) => {
 }, false);
 
 img1.onload = () => {
+    check1 = 1;
     let canvas = document.getElementById('canvasInputId1');
     let context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -178,6 +185,7 @@ img1.onload = () => {
 }
 
 img2.onload = () => {
+    check2 = 1;
     let canvas = document.getElementById('canvasInputId2');
     let context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
